@@ -33,21 +33,23 @@ for i in range(deltaDays):
     print(soup.title)
     print("============> Start write file")
     # 写文件
-    with open("test.html", "w+", encoding="utf-8") as out_file:
+    html_file_name = "./html/"+date+".html"
+    print(html_file_name)
+    with open(html_file_name, "w+", encoding="utf-8") as out_file:
         out_file.write(soup.prettify())
     print("============> Finish write file!!!")
     outputString = ""
     trs = soup.find_all(attrs={"class": "faretable-row"})
     for tr in trs:
-        outputString += tr.get_text("|", strip=True)
+        outputString += tr.get_text("|", strip=True)+"|"
 # arr = outputString.split("|")
 # print(arr)
     thisdict[date] = outputString
-y = json.dumps(thisdict)
+y = json.dumps(thisdict, indent=4)
 
 print(y)
 # 写文件
-with open("output.txt", "w+", encoding="utf-8") as out_file:
+with open("./json/output.json", "w+", encoding="utf-8") as out_file:
     out_file.write(y)
 print("============> Finish all!!!")
 
