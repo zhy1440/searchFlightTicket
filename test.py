@@ -21,10 +21,10 @@ soup = BeautifulSoup(r.text, "html.parser", from_encoding="utf-8")
 print(soup.title.get_text())
 imgs = soup.find_all('img')
 for img in imgs:
-    url = img['src']
-    r = requests.get(url, stream=True)
-    image_name = url.split('/')[-1]
-    print(url)
+    imgUrl = "https://book.cebupacificair.com/"+img['src']
+    r = requests.get(imgUrl, stream=True)
+    image_name = imgUrl.split('/')[-1]
+    print("================>", imgUrl)
     # with open('./img/%s' % image_name, 'wb') as f:
     #     for chunk in r.iter_content(chunk_size=128):
     #         f.write(chunk)

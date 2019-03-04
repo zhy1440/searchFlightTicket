@@ -2,7 +2,8 @@
 /*jshint esversion: 6 */
 var fs = require("fs");
 var _ = require("lodash");
-const file_name = "./json/output.json";
+const file_name = "./json/go.json";
+const PHP_2_RMB = 7.7;
 
 /**===================================== Get objects from file ==================================**/
 const flightList = JSON.parse(fs.readFileSync(file_name));
@@ -10,11 +11,11 @@ for (const key in flightList) {
     if (flightList.hasOwnProperty(key)) {
         const flight = _.chain(flightList[key])
             .split("|")
-            .filter((e) => e.includes("PHP"))
+            .filter((e) => e.includes("CNY"))
             .map((s) => s.substring(4).replace(",", ""))
             .min()
             .value();
-        console.log(key,flight);
+        console.log(key, flight);
     }
 }
 // console.log(flightList)
